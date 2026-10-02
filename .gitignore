@@ -1,0 +1,8 @@
+node_modules/
+build/
+*.pem
+.env
+.env.*
+config.local.json
+*private*
+market-entry.generated.json

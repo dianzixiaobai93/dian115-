@@ -1,0 +1,92 @@
+{
+  "id": "xiaobai.qq-notify",
+  "name": "QQ 通知",
+  "version": "0.1.2",
+  "description": "NapCat / OneBot 11 私聊与群通知、Emby 新入库检测、可配置历史适配器、持久化重试队列。默认暂停发送，需用户配置后开启。",
+  "author": "小白 · 本地开发",
+  "package_url": "https://example.invalid/local-only/xiaobai.qq-notify-0.1.1.d115p",
+  "sha256": "REPLACED_BY_PACKAGER",
+  "runtime": {
+    "kind": "wasm",
+    "protocol": "dian115:wasm@1",
+    "autostart": true,
+    "trust_level": "wasm-sandbox"
+  },
+  "permissions": {
+    "apis": [
+      {
+        "method": "GET",
+        "path": "/api/plugin-runtime/storage/:key",
+        "reason": "读取插件配置、游标、发送队列与日志"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/plugin-runtime/storage/:key",
+        "reason": "持久化配置、增量游标与发送状态"
+      },
+      {
+        "method": "GET",
+        "path": "/api/plugin-host/emby/instances",
+        "reason": "选择用户已配置的 Emby 实例",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/plugin-host/emby/libraries",
+        "reason": "选择入库通知的媒体库",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/plugin-host/emby/items",
+        "reason": "分页检测电影及剧集入库",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/organize/history",
+        "reason": "用户配置映射后检测整理历史",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/tasks",
+        "reason": "用户配置映射后检测后台任务",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/history",
+        "reason": "用户配置映射后检测操作历史",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/tmdb/movie/:id",
+        "reason": "读取入库媒体的公开海报与分类",
+        "optional": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/tmdb/tv/:id",
+        "reason": "读取入库媒体的公开海报与分类",
+        "optional": true
+      }
+    ],
+    "network": [
+      {
+        "origin": "http://napcat:3000",
+        "methods": [
+          "POST"
+        ],
+        "proxy_mode": "direct",
+        "reason": "通过宿主 Broker 调用局域网 NapCat OneBot 11 并使用托管凭据"
+      }
+    ]
+  },
+  "tags": [
+    "qq",
+    "notification",
+    "napcat"
+  ]
+}
